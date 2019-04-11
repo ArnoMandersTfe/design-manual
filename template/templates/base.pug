@@ -44,7 +44,12 @@ html(lang="en")
                 li(class="breadcrumbs__item breadcrumbs__item--current")
                   a.breadcrumbs__section(href=item.href) #{item.label}
             li.breadcrumbs__item(class="js-breadcrumb")
-        
+
+        if themeItems.length
+          .header_themes
+            select
+              each themeItem in themeItems
+                option(value=themeItem.url) #{themeItem.label}
         .header__meta
           .header__meta__info
               .header__meta__info__domain #{meta.domain}
