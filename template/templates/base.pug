@@ -334,8 +334,13 @@ html(lang="en")
             }
           }
 
-          window.delegate.bind(document.body, 'a', 'click', onLinkClick);
+          function onThemeChange(e) {
+            var select = e.delegateTarget;
+            console.log('onThemeChange');
+          }
 
+          window.delegate.bind(document.body, 'a', 'click', onLinkClick);
+          window.delegate.bind(document.body, '.header_themes select', 'change', onThemeChange)
 
           /**
           * Initial scroll to anchor when location.hash is set
