@@ -6,7 +6,7 @@
   top: 0;
   background-color: $primary;
   z-index: 100;
-  border-bottom: 1px solid rgba(black, .1);
+  border-bottom: 1px solid rgba(black, 0.1);
   overflow: hidden;
 
   @media (min-width: $breakpoint-xl) {
@@ -40,9 +40,9 @@
   z-index: 2;
   color: $primary-contrast;
   padding: 19px;
-  opacity: .8;
-  transition: opacity .15s;
-  border-right: 1px solid rgba(black, .1);
+  opacity: 0.8;
+  transition: opacity 0.15s;
+  border-right: 1px solid rgba(black, 0.1);
   font-size: 22px;
   user-select: none;
   -webkit-font-smoothing: none;
@@ -62,12 +62,12 @@
 
 .header__nav {
   position: relative;
-  transition: opacity .15s ease;
+  transition: opacity 0.15s ease;
   z-index: 5;
   float: left;
   display: none;
   opacity: 1;
-  border-bottom: 1px solid rgba(black, .1);
+  border-bottom: 1px solid rgba(black, 0.1);
 
   @media (min-width: $breakpoint-l) {
     display: block;
@@ -76,7 +76,7 @@
 
 .header__nav__item {
   display: inline-block;
-  border-right: 1px solid rgba(black, .1);
+  border-right: 1px solid rgba(black, 0.1);
 }
 
 .header__nav__item__link {
@@ -86,14 +86,14 @@
   text-decoration: none;
   font-weight: 600;
   display: block;
-  transition: background-color .15s;
+  transition: background-color 0.15s;
 
   &:hover {
     text-decoration: underline;
   }
 
   &.is-active {
-    background-color: rgba(0, 0, 0, .1);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -104,7 +104,7 @@
 .header__meta {
   display: inline-block;
   color: $primary-contrast;
-  border-left: 1px solid rgba(black, .1);
+  border-left: 1px solid rgba(black, 0.1);
   padding-top: 5px;
   padding-right: 5px;
   float: right;
@@ -116,7 +116,7 @@
   position: relative;
   user-select: none;
   height: 100%;
-  transition: background-color .15s;
+  transition: background-color 0.15s;
 }
 
 .header__meta__info {
@@ -144,19 +144,21 @@
   margin-left: 5px;
 }
 
-
 .header__meta__avatar {
   height: 50px;
   display: inline-block;
 }
 
+.header_themes {
+  float: right;
+  padding: 20px 10px;
+}
 
 /**
  * Scrolled view
  */
 
 .is-scrolled-in-section {
-
   .header__nav {
     opacity: 0;
     pointer-events: none;
@@ -169,6 +171,6 @@
   }
 
   .scrolltop {
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
   }
 }

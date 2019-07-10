@@ -45,11 +45,7 @@ html(lang="en")
                   a.breadcrumbs__section(href=item.href) #{item.label}
             li.breadcrumbs__item(class="js-breadcrumb")
 
-        if themeItems.length
-          .header_themes
-            select
-              each themeItem in themeItems
-                option(value=themeItem.url) #{themeItem.label}
+
         .header__meta
           .header__meta__info
               .header__meta__info__domain #{meta.domain}
@@ -60,6 +56,12 @@ html(lang="en")
             
           if meta.avatar
             img(src=meta.avatar).header__meta__avatar
+
+        if themeItems.length
+            .header_themes
+              select
+                each themeItem in themeItems
+                  option(value=themeItem.url) #{themeItem.label}
 
       .content
         | !{content}
