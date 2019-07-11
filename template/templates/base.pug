@@ -126,6 +126,8 @@ html(lang="en")
                 $codeCheckbox.checked = true;
                 onToggleCode({ target: $codeCheckbox });
               }
+
+              initTheme();
             },
             callback_error: function ($el) {
               $el.parentNode.parentNode.classList.remove('has-error');
@@ -336,13 +338,64 @@ html(lang="en")
             }
           }
 
+          function initTheme() {
+            var stylesheetUrl = getThemeLocalStorage();
+            var select = document.querySelectorAll('.header_themes select')[0];
+            if (stylesheetUrl === '') {
+              stylesheetUrl = select.value;
+            } else {
+              if (select.value !==  stylesheetUrl) {
+                select.value = stylesheetUrl;
+              }
+              
+            }
+
+            setTheme(stylesheetUrl);
+          }
+
           function onThemeChange(e) {
             var select = e.delegateTarget;
-            console.log('onThemeChange');
+            setTheme(select.value);
+          }
+
+          function setTheme(stylesheetUrl) {
+             var iframes = document.querySelectorAll('.component__preview__iframe.loaded');
+              for (var i = 0; i < iframes.length; i++) {
+                var iframe = iframes[i];
+                var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+
+                var styleSheet = innerDoc.querySelectorAll('.theme-stylesheet');
+
+                if (styleSheet.length) {
+                  styleSheet[0].setAttribute('href', stylesheetUrl);
+                } else {
+                  var html = document.createElement('div');
+                  
+                  html.innerHTML = '<link rel="stylesheet" type="text/css" class="theme-stylesheet" href="'+stylesheetUrl+'">';
+
+                    innerDoc.querySelectorAll('head')[0].appendChild(html.firstChild);
+                }
+              }
+
+              setThemeLocalStorage(stylesheetUrl);
+          }
+
+          function setThemeLocalStorage(stylesheetUrl) {
+            localStorage.setItem('stylesheetUrl', stylesheetUrl);
+          }
+
+          function getThemeLocalStorage() {
+            var stylesheetUrl = '';
+            if (localStorage.getItem('stylesheetUrl')) {
+              stylesheetUrl = localStorage.getItem('stylesheetUrl');
+            }
+
+            return stylesheetUrl;
           }
 
           window.delegate.bind(document.body, 'a', 'click', onLinkClick);
-          window.delegate.bind(document.body, '.header_themes select', 'change', onThemeChange)
+          window.delegate.bind(document.body, '.header_themes select', 'change', onThemeChange);
+          initTheme();
 
           /**
           * Initial scroll to anchor when location.hash is set
